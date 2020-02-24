@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { RouterState, RouterStore } from '../router-store';
-export interface LinkProps
-    extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     routerStore: RouterStore;
     toState: RouterState;
     className?: string;
@@ -33,7 +32,5 @@ export interface LinkProps
  */
 export declare class Link extends React.Component<LinkProps, {}> {
     render(): JSX.Element;
-    handleClick: (
-        event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-    ) => Promise<RouterState> | undefined;
+    handleClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => Promise<RouterState> | undefined;
 }

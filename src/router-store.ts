@@ -26,6 +26,7 @@ export interface JsRouterState {
 
 export interface RouterStateOptions {
     replace?: boolean;
+    skipTransitions?: boolean;
 }
 
 /**
@@ -226,6 +227,11 @@ export class RouterStore {
         const { beforeExit, onExit } = this.getRoute(fromState.routeName);
         const { beforeEnter, onEnter } = this.getRoute(toState.routeName);
 
+        if (toState.options && toState.options.skipTransitions) {
+            console.log('skippy transitions')
+            this.setRouterState(toState);
+            return toState;
+        }
         // Call the transition hook chain
         this.isTransitioning = true;
 

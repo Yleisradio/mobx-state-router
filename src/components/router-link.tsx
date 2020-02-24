@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import { RouterState, StringMap } from '../router-store';
+import { RouterState, StringMap, RouterStateOptions } from '../router-store';
 import { routerStateToUrl } from '../adapters/generate-url';
 
 function isLeftClickEvent(event: React.MouseEvent<HTMLElement>) {
@@ -19,7 +19,7 @@ export interface RouterLinkProps
     queryParams?: { [key: string]: any };
     className?: string;
     activeClassName?: string;
-    options?: { [key: string]: any };
+    options?: RouterStateOptions;
 }
 
 /**
@@ -99,6 +99,7 @@ export class RouterLink extends React.Component<RouterLinkProps, {}> {
             routeName,
             params,
             queryParams,
+            options,
             onClick
         } = this.props;
         const { routerStore } = rootStore;
@@ -107,6 +108,6 @@ export class RouterLink extends React.Component<RouterLinkProps, {}> {
         if (onClick) onClick(event);
 
         // Change the router state to trigger a refresh
-        return routerStore.goTo(routeName, params, queryParams);
+        return routerStore.goTo(routeName, params, queryParams, options);
     };
 }

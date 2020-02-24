@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { StringMap } from '../router-store';
-export interface RouterLinkProps
-    extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+import { StringMap, RouterStateOptions } from '../router-store';
+export interface RouterLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     rootStore?: any;
     routeName: string;
     params?: StringMap;
@@ -10,9 +9,7 @@ export interface RouterLinkProps
     };
     className?: string;
     activeClassName?: string;
-    options?: {
-        [key: string]: any;
-    };
+    options?: RouterStateOptions;
 }
 /**
  * Creates an anchor tag that links to a router state. Redirects to the target
@@ -42,7 +39,5 @@ export interface RouterLinkProps
  */
 export declare class RouterLink extends React.Component<RouterLinkProps, {}> {
     render(): JSX.Element;
-    handleClick: (
-        event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-    ) => any;
+    handleClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => any;
 }

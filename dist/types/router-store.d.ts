@@ -23,6 +23,7 @@ export interface JsRouterState {
 }
 export interface RouterStateOptions {
     replace?: boolean;
+    skipTransitions?: boolean;
 }
 /**
  * Holds the state of the router. Always use the constructor to create
@@ -43,23 +44,14 @@ export declare class RouterState {
      * @param {[key: string]: any} queryParams, e.g. { q: 'apple' } or { items: ['E1', 'E2'] }
      * @param {RouterStateOptions} options, e.g. { replace: true } to replace History entry
      */
-    constructor(
-        routeName: string,
-        params?: StringMap,
-        queryParams?: {
-            [key: string]: any;
-        },
-        options?: RouterStateOptions
-    );
+    constructor(routeName: string, params?: StringMap, queryParams?: {
+        [key: string]: any;
+    }, options?: RouterStateOptions);
     static create(jsRouterState: JsRouterState): RouterState;
     isEqual(other: RouterState): boolean;
 }
 export interface TransitionHook {
-    (
-        fromState: RouterState,
-        toState: RouterState,
-        routerStore: RouterStore
-    ): Promise<void>;
+    (fromState: RouterState, toState: RouterState, routerStore: RouterStore): Promise<void>;
 }
 export interface ErrorHook {
     (err: Error): any;
@@ -88,12 +80,7 @@ export declare class RouterStore {
     onError?: ErrorHook;
     routerState: RouterState;
     isTransitioning: boolean;
-    constructor(
-        rootStore: any,
-        routes: Route[],
-        notFoundState: RouterState,
-        initialState?: JsRouterState
-    );
+    constructor(rootStore: any, routes: Route[], notFoundState: RouterState, initialState?: JsRouterState);
     hydrate(state: JsRouterState): void;
     serialize(): JsRouterState;
     setErrorHook(onError: ErrorHook): void;
@@ -102,14 +89,9 @@ export declare class RouterStore {
      * may be different from the requested one based on enter and exit hooks.
      */
     goTo(toState: RouterState): Promise<RouterState>;
-    goTo(
-        routeName: string,
-        params?: StringMap,
-        queryParams?: {
-            [key: string]: any;
-        },
-        options?: RouterStateOptions
-    ): Promise<RouterState>;
+    goTo(routeName: string, params?: StringMap, queryParams?: {
+        [key: string]: any;
+    }, options?: RouterStateOptions): Promise<RouterState>;
     goToNotFound(): Promise<RouterState>;
     getRoute(routeName: string): Route;
     getCurrentRoute(): Route;
