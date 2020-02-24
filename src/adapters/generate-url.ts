@@ -26,7 +26,11 @@ const getGenerator = (pattern: string): PathFunction => {
  *     generateUrl('/departments/:id', { id: 'electronics' })
  *     => '/departments/electronics'
  */
-export const generateUrl = (pattern = '/', params = {}, queryParams = {}) => {
+export const generateUrl = (
+    pattern = '/',
+    params = {},
+    queryParams = {}
+): string => {
     // inject params
     const generator = getGenerator(pattern);
     let url = generator(params);

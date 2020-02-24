@@ -19,6 +19,7 @@ export interface RouterLinkProps
     queryParams?: { [key: string]: any };
     className?: string;
     activeClassName?: string;
+    options?: { [key: string]: any };
 }
 
 /**
@@ -58,6 +59,7 @@ export class RouterLink extends React.Component<RouterLinkProps, {}> {
             queryParams,
             className,
             activeClassName,
+            options,
             children,
             href, // remove from `...others`
             onClick, // remove from `...others`

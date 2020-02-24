@@ -24,6 +24,10 @@ export interface JsRouterState {
     queryParams?: { [key: string]: any };
 }
 
+export interface RouterStateOptions {
+    replace?: boolean;
+}
+
 /**
  * Holds the state of the router. Always use the constructor to create
  * an instance. Once an instance is created, don't mutate it - create a
@@ -35,11 +39,13 @@ export class RouterState {
      * @param {string} routeName, e.g. 'department'
      * @param {StringMap} params, e.g. { id: 'electronics' }
      * @param {[key: string]: any} queryParams, e.g. { q: 'apple' } or { items: ['E1', 'E2'] }
+     * @param {RouterStateOptions} options, e.g. { replace: true } to replace History entry
      */
     constructor(
         readonly routeName: string,
         readonly params: StringMap = {},
-        readonly queryParams: { [key: string]: any } = {}
+        readonly queryParams: { [key: string]: any } = {},
+        readonly options: RouterStateOptions = {}
     ) {}
 
     static create(jsRouterState: JsRouterState): RouterState {
@@ -140,16 +146,23 @@ export class RouterStore {
     goTo(
         routeName: string,
         params?: StringMap,
-        queryParams?: { [key: string]: any }
+        queryParams?: { [key: string]: any },
+        options?: RouterStateOptions
     ): Promise<RouterState>;
     goTo(
         toStateOrRouteName: RouterState | string,
         params: StringMap = {},
-        queryParams: { [key: string]: any } = {}
+        queryParams: { [key: string]: any } = {},
+        options: RouterStateOptions = {}
     ): Promise<RouterState> {
         const toState =
             typeof toStateOrRouteName === 'string'
-                ? new RouterState(toStateOrRouteName, params, queryParams)
+                ? new RouterState(
+                      toStateOrRouteName,
+                      params,
+                      queryParams,
+                      options
+                  )
                 : toStateOrRouteName;
         const fromState = this.routerState;
         return this.transition(fromState, toState);
