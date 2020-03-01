@@ -63,11 +63,26 @@ var HistoryAdapter = /** @class */ (function () {
         };
         this.routerStore = routerStore;
         this.history = history;
+        // console.log('initial stuff for funz', routerStore.routerState);
+        // const targetSearchThingie = stringify(routerStore.routerState.queryParams)
+        // console.log('mooo', targetSearchThingie)
+        // console.log('initial window location', JSON.stringify(window.history.state))
+        var initialRouterStateUrl = generate_url_1.routerStateToUrl(routerStore, routerStore.routerState);
+        // @ts-ignore
+        window.history.replaceState({}, '', initialRouterStateUrl);
+        // console.log('history location before,', JSON.stringify(this.history.location, null, 2))
+        // console.log('initialrsurl', initialRouterStateUrl)
+        // this.history.replace(initialRouterStateUrl);
+        // console.log('history location after', JSON.stringify(this.history.location, null, 2))
         // Go to current history location
         // tslint:disable-next-line:no-floating-promises
         this.goToLocation(this.history.location);
         // Listen for history changes
         this.history.listen(function (location) { return _this.goToLocation(location); });
+        // @ts-ignore
+        window.libHistory = History;
+        // @ts-ignore
+        window.libLocation = Location;
     }
     return HistoryAdapter;
 }());

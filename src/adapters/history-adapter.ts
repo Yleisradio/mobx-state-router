@@ -17,15 +17,40 @@ export class HistoryAdapter {
         this.routerStore = routerStore;
         this.history = history;
 
+        // console.log('initial stuff for funz', routerStore.routerState);
+        // const targetSearchThingie = stringify(routerStore.routerState.queryParams)
+        // console.log('mooo', targetSearchThingie)
+
+        // console.log('initial window location', JSON.stringify(window.history.state))
+
+        const initialRouterStateUrl = routerStateToUrl(
+            routerStore, routerStore.routerState
+        )
+
+        // @ts-ignore
+        window.history.replaceState({}, '', initialRouterStateUrl)
+        // console.log('history location before,', JSON.stringify(this.history.location, null, 2))
+        // console.log('initialrsurl', initialRouterStateUrl)
+        // this.history.replace(initialRouterStateUrl);
+
+        // console.log('history location after', JSON.stringify(this.history.location, null, 2))
+
         // Go to current history location
         // tslint:disable-next-line:no-floating-promises
         this.goToLocation(this.history.location);
 
         // Listen for history changes
         this.history.listen(location => this.goToLocation(location));
+
+        // @ts-ignore
+        window.libHistory = History
+        // @ts-ignore
+        window.libLocation = Location
     }
 
-    goToLocation = (location: Location): Promise<RouterState> => {
+    goToLocation = (
+        location: Location
+    ): Promise<RouterState> => {
         // if (process.env.NODE_ENV === 'development') {
         //     console.log(
         //         `HistoryAdapter.goToLocation(${JSON.stringify(location)})`
