@@ -159,6 +159,13 @@ export class RouterStore {
         queryParams: { [key: string]: any } = {},
         options: RouterStateOptions = {}
     ): Promise<RouterState> {
+        console.log(
+            'gotogoto',
+            toStateOrRouteName,
+            params,
+            queryParams,
+            options
+        );
         const toState =
             typeof toStateOrRouteName === 'string'
                 ? new RouterState(

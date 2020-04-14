@@ -22,7 +22,11 @@ export class HistoryAdapter {
         this.goToLocation(this.history.location);
 
         // Listen for history changes
-        this.history.listen(location => this.goToLocation(location));
+        this.history.listen(location => {
+            console.log('history listen', location);
+            // tslint:disable-next-line: no-floating-promises
+            this.goToLocation(location);
+        });
     }
 
     goToLocation = (location: Location): Promise<RouterState> => {
@@ -31,7 +35,7 @@ export class HistoryAdapter {
         //         `HistoryAdapter.goToLocation(${JSON.stringify(location)})`
         //     );
         // }
-
+        console.log('gotoLocation', location);
         // Find the matching route
         const routes = this.routerStore.routes;
         let matchingRoute = null;
@@ -46,6 +50,7 @@ export class HistoryAdapter {
         }
 
         if (matchingRoute) {
+            console.log('found matchingroute', matchingRoute);
             return this.routerStore.goTo(
                 new RouterState(
                     matchingRoute.name,
@@ -54,11 +59,13 @@ export class HistoryAdapter {
                 )
             );
         } else {
+            console.log('notfound');
             return this.routerStore.goToNotFound();
         }
     };
 
     goBack = () => {
+        console.log('goback');
         this.history.goBack();
     };
 
@@ -66,6 +73,7 @@ export class HistoryAdapter {
         reaction(
             () => this.routerStore.routerState,
             (routerState: RouterState) => {
+                console.log('observerouterstatechanges');
                 const location = this.history.location;
                 const currentUrl = `${location.pathname}${location.search}`;
                 const routerStateUrl = routerStateToUrl(
@@ -73,9 +81,16 @@ export class HistoryAdapter {
                     routerState
                 );
                 if (currentUrl !== routerStateUrl) {
+                    console.log(
+                        'currenturl mishmash',
+                        currentUrl,
+                        routerStateUrl
+                    );
                     if (routerState.options && routerState.options.replace) {
+                        console.log('replace');
                         this.history.replace(routerStateUrl);
                     } else {
+                        console.log('push');
                         this.history.push(routerStateUrl);
                     }
                     // if (process.env.NODE_ENV === 'development') {
