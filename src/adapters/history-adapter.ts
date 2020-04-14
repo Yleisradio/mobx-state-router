@@ -64,6 +64,14 @@ export class HistoryAdapter {
         }
     };
 
+    push = (path: string, state?: any) => {
+        this.history.push(path, state);
+    };
+
+    replace = (path: string, state?: any) => {
+        this.history.replace(path, state);
+    };
+
     goBack = () => {
         console.log('goback');
         this.history.goBack();

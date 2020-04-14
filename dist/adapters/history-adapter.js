@@ -45,6 +45,12 @@ var HistoryAdapter = /** @class */ (function() {
                 return _this.routerStore.goToNotFound();
             }
         };
+        this.push = function(path, state) {
+            _this.history.push(path, state);
+        };
+        this.replace = function(path, state) {
+            _this.history.replace(path, state);
+        };
         this.goBack = function() {
             console.log('goback');
             _this.history.goBack();

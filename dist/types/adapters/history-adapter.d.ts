@@ -9,6 +9,8 @@ export declare class HistoryAdapter {
     history: History;
     constructor(routerStore: RouterStore, history: History);
     goToLocation: (location: Location<any>) => Promise<RouterState>;
+    push: (path: string, state?: any) => void;
+    replace: (path: string, state?: any) => void;
     goBack: () => void;
     observeRouterStateChanges: () => void;
 }
