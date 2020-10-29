@@ -45,6 +45,13 @@ var __decorate =
 var __awaiter =
     (this && this.__awaiter) ||
     function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P
+                ? value
+                : new P(function(resolve) {
+                      resolve(value);
+                  });
+        }
         return new (P || (P = Promise))(function(resolve, reject) {
             function fulfilled(value) {
                 try {
@@ -63,9 +70,7 @@ var __awaiter =
             function step(result) {
                 result.done
                     ? resolve(result.value)
-                    : new P(function(resolve) {
-                          resolve(result.value);
-                      }).then(fulfilled, rejected);
+                    : adopt(result.value).then(fulfilled, rejected);
             }
             step(
                 (generator = generator.apply(thisArg, _arguments || [])).next()
@@ -178,6 +183,7 @@ var __generator =
         }
     };
 Object.defineProperty(exports, '__esModule', { value: true });
+exports.RouterStore = exports.RouterState = void 0;
 var value_equal_1 = require('./utils/value-equal');
 var mobx_1 = require('mobx');
 /**

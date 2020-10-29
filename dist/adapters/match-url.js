@@ -5,6 +5,7 @@ var __importDefault =
         return mod && mod.__esModule ? mod : { default: mod };
     };
 Object.defineProperty(exports, '__esModule', { value: true });
+exports.matchUrl = void 0;
 var path_to_regexp_1 = __importDefault(require('path-to-regexp'));
 var patternInfoCache = {};
 var getPatternInfo = function(pattern) {

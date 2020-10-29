@@ -1,8 +1,8 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
-var query_string_1 = require('query-string');
+exports.StaticAdapter = void 0;
 var router_store_1 = require('../router-store');
-var match_url_1 = require('./match-url');
+var find_matching_route_1 = require('./find-matching-route');
 /**
  * Responsible for driving `RouterState` programmatically instead of the
  * Browser bar. This is useful in server-side rendering scenarios where
@@ -20,24 +20,13 @@ var StaticAdapter = /** @class */ (function() {
             //     );
             // }
             // Find the matching route
-            var routes = _this.routerStore.routes;
-            var matchingRoute = null;
-            var params = undefined;
-            for (var i = 0; i < routes.length; i++) {
-                var route = routes[i];
-                params = match_url_1.matchUrl(location.pathname, route.pattern);
-                if (params) {
-                    matchingRoute = route;
-                    break;
-                }
-            }
+            var matchingRoute = find_matching_route_1.findMatchingRoute(
+                location,
+                _this.routerStore.routes
+            );
             if (matchingRoute) {
                 return _this.routerStore.goTo(
-                    new router_store_1.RouterState(
-                        matchingRoute.name,
-                        params,
-                        query_string_1.parse(location.search)
-                    )
+                    router_store_1.RouterState.create(matchingRoute)
                 );
             } else {
                 return _this.routerStore.goToNotFound();

@@ -2,6 +2,7 @@
 // Based on https://github.com/mjackson/value-equal
 // Applied fix for https://github.com/mjackson/value-equal/issues/10
 Object.defineProperty(exports, '__esModule', { value: true });
+exports.valueEqual = void 0;
 function valueEqual(a, b) {
     if (a === b) return true;
     if (a == null || b == null) return false;

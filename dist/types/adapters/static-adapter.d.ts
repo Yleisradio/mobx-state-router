@@ -9,5 +9,5 @@ import { RouterState, RouterStore } from '../router-store';
 export declare class StaticAdapter {
     routerStore: RouterStore;
     constructor(routerStore: RouterStore);
-    goToLocation: (location: Location<any>) => Promise<RouterState>;
+    goToLocation: (location: Location) => Promise<RouterState>;
 }

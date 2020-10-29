@@ -1,10 +1,10 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
+exports.HistoryAdapter = void 0;
 var mobx_1 = require('mobx');
-var query_string_1 = require('query-string');
 var router_store_1 = require('../router-store');
 var generate_url_1 = require('./generate-url');
-var match_url_1 = require('./match-url');
+var find_matching_route_1 = require('./find-matching-route');
 /**
  * Responsible for keeping the browser address bar and the `RouterState`
  * in sync. It also provides a `goBack()` method to go back in history.
@@ -19,24 +19,13 @@ var HistoryAdapter = /** @class */ (function() {
             //     );
             // }
             // Find the matching route
-            var routes = _this.routerStore.routes;
-            var matchingRoute = null;
-            var params = undefined;
-            for (var i = 0; i < routes.length; i++) {
-                var route = routes[i];
-                params = match_url_1.matchUrl(location.pathname, route.pattern);
-                if (params) {
-                    matchingRoute = route;
-                    break;
-                }
-            }
+            var matchingRoute = find_matching_route_1.findMatchingRoute(
+                location,
+                _this.routerStore.routes
+            );
             if (matchingRoute) {
                 return _this.routerStore.goTo(
-                    new router_store_1.RouterState(
-                        matchingRoute.name,
-                        params,
-                        query_string_1.parse(location.search)
-                    )
+                    router_store_1.RouterState.create(matchingRoute)
                 );
             } else {
                 return _this.routerStore.goToNotFound();

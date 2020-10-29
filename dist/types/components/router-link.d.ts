@@ -40,7 +40,5 @@ export interface RouterLinkProps
  */
 export declare class RouterLink extends React.Component<RouterLinkProps, {}> {
     render(): JSX.Element;
-    handleClick: (
-        event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-    ) => any;
+    handleClick: (event: React.MouseEvent<HTMLAnchorElement>) => any;
 }

@@ -1,19 +1,71 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 var router_store_1 = require('./router-store');
-exports.RouterState = router_store_1.RouterState;
-exports.RouterStore = router_store_1.RouterStore;
+Object.defineProperty(exports, 'RouterState', {
+    enumerable: true,
+    get: function() {
+        return router_store_1.RouterState;
+    }
+});
+Object.defineProperty(exports, 'RouterStore', {
+    enumerable: true,
+    get: function() {
+        return router_store_1.RouterStore;
+    }
+});
 var router_view_1 = require('./components/router-view');
-exports.RouterView = router_view_1.RouterView;
+Object.defineProperty(exports, 'RouterView', {
+    enumerable: true,
+    get: function() {
+        return router_view_1.RouterView;
+    }
+});
 var link_1 = require('./components/link');
-exports.Link = link_1.Link;
+Object.defineProperty(exports, 'Link', {
+    enumerable: true,
+    get: function() {
+        return link_1.Link;
+    }
+});
 var router_link_1 = require('./components/router-link');
-exports.RouterLink = router_link_1.RouterLink;
+Object.defineProperty(exports, 'RouterLink', {
+    enumerable: true,
+    get: function() {
+        return router_link_1.RouterLink;
+    }
+});
 var history_adapter_1 = require('./adapters/history-adapter');
-exports.HistoryAdapter = history_adapter_1.HistoryAdapter;
+Object.defineProperty(exports, 'HistoryAdapter', {
+    enumerable: true,
+    get: function() {
+        return history_adapter_1.HistoryAdapter;
+    }
+});
 var static_adapter_1 = require('./adapters/static-adapter');
-exports.StaticAdapter = static_adapter_1.StaticAdapter;
+Object.defineProperty(exports, 'StaticAdapter', {
+    enumerable: true,
+    get: function() {
+        return static_adapter_1.StaticAdapter;
+    }
+});
 var generate_url_1 = require('./adapters/generate-url');
-exports.generateUrl = generate_url_1.generateUrl;
-exports.routerStateToUrl = generate_url_1.routerStateToUrl;
+Object.defineProperty(exports, 'generateUrl', {
+    enumerable: true,
+    get: function() {
+        return generate_url_1.generateUrl;
+    }
+});
+Object.defineProperty(exports, 'routerStateToUrl', {
+    enumerable: true,
+    get: function() {
+        return generate_url_1.routerStateToUrl;
+    }
+});
+var find_matching_route_1 = require('./adapters/find-matching-route');
+Object.defineProperty(exports, 'findMatchingRoute', {
+    enumerable: true,
+    get: function() {
+        return find_matching_route_1.findMatchingRoute;
+    }
+});
 //# sourceMappingURL=index.js.map
